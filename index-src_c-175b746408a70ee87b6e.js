@@ -345,8 +345,11 @@ __webpack_require__.r(__webpack_exports__);
 
 const Displayer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
     props: {
-        video: { type: Object, required: true },
-        segment: { type: Object },
+        video: { type: Object, default: {} },
+        segment: {
+            type: Object,
+            default: {},
+        },
     },
 });
 /* harmony default export */ __webpack_exports__["default"] = (Displayer);
@@ -925,4 +928,4 @@ if(false) {}
 /***/ })
 
 }]);
-//# sourceMappingURL=index-src_c-0bf66e00011bd905511a.js.map
+//# sourceMappingURL=index-src_c-175b746408a70ee87b6e.js.map
