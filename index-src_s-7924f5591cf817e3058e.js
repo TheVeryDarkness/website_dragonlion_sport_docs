@@ -20,7 +20,9 @@ var _hoisted_1 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Tree = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Tree");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("fieldset", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  var _component_Displayer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Displayer");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("fieldset", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return _ctx.key = $event;
@@ -63,13 +65,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: index,
       root: root,
       want: _ctx.search,
-      locked: _ctx.locked
+      locked: _ctx.locked,
+      onChoose: _ctx.chooseNode
     }, null, 8
     /* PROPS */
-    , ["root", "want", "locked"]);
+    , ["root", "want", "locked", "onChoose"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]);
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Displayer, {
+    node: _ctx.chosenNode
+  }, null, 8
+  /* PROPS */
+  , ["node"])], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -537,4 +546,4 @@ if(false) {}
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=index-src_s-94dada2c8907568f4e5c.js.map
+//# sourceMappingURL=index-src_s-7924f5591cf817e3058e.js.map

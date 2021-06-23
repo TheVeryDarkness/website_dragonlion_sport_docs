@@ -65,13 +65,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: index,
       root: root,
       want: _ctx.search,
-      locked: _ctx.locked
+      locked: _ctx.locked,
+      onChoose: _ctx.chooseNode
     }, null, 8
     /* PROPS */
-    , ["root", "want", "locked"]);
+    , ["root", "want", "locked", "onChoose"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Displayer)], 64
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Displayer, {
+    node: ""
+  })], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -168,7 +171,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.has_sub ? _ctx.open ? "→" : "↓" : "[]"), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.root.value) + " ", 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+    onClick: _cache[2] || (_cache[2] = function () {
+      return _ctx.chooseNode && _ctx.chooseNode.apply(_ctx, arguments);
+    })
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.root.value), 1
   /* TEXT */
   ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(['src', 'origin'], function (key, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
@@ -195,10 +202,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       root: item,
       want: _ctx.want,
       locked: _ctx.locked,
-      onFound: _ctx._found
+      onFound: _ctx._found,
+      onChoose: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(_ctx._choose, ["stop"])
     }, null, 8
     /* PROPS */
-    , ["root", "want", "locked", "onFound"]);
+    , ["root", "want", "locked", "onFound", "onChoose"]);
   }), 128
   /* KEYED_FRAGMENT */
   ))], 512
@@ -244,7 +252,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\ntable {\r\n  margin: auto;\r\n  bord
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tree_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/tree.vue */ "./src/tree.vue");
 /* harmony import */ var _displayer_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/displayer.vue */ "./src/displayer.vue");
-/* harmony import */ var _displayer_vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_displayer_vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/.pnpm/registry.nlark.com+vue@3.1.1/node_modules/vue/dist/vue.esm-bundler.js");
 
 
@@ -302,10 +309,11 @@ const select = (0,vue__WEBPACK_IMPORTED_MODULE_2__.defineComponent)({
             key: "",
             locked: true,
             search: noSearch,
+            chosenNodes: new Array(),
         };
     },
     props: { video: { type: Object, required: true } },
-    components: { Tree: _tree_vue__WEBPACK_IMPORTED_MODULE_0__.default, Displayer: (_displayer_vue__WEBPACK_IMPORTED_MODULE_1___default()) },
+    components: { Tree: _tree_vue__WEBPACK_IMPORTED_MODULE_0__.default, Displayer: _displayer_vue__WEBPACK_IMPORTED_MODULE_1__.default },
     methods: {
         reset() {
             this.search = noSearch;
@@ -317,6 +325,9 @@ const select = (0,vue__WEBPACK_IMPORTED_MODULE_2__.defineComponent)({
             this.locked = !this.locked;
             if (this.locked)
                 makeFile("result.json", JSON.stringify(this.video));
+        },
+        chooseNode(...nodes) {
+            this.chosenNodes = nodes;
         },
     },
 });
@@ -384,7 +395,7 @@ const tree = (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
             return this.referenced || this.opened;
         },
     },
-    emits: ["found"],
+    emits: ["found", "choose"],
     methods: {
         _found(foundInSub) {
             this.referenced = foundInSub || this.referenced;
@@ -392,6 +403,12 @@ const tree = (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
         },
         changeStatus() {
             this.opened = !this.opened;
+        },
+        chooseNode() {
+            this.$emit("choose", this.root);
+        },
+        _choose(...nodes) {
+            this.$emit("choose", ...nodes, this.root);
         },
     },
     watch: {
@@ -811,4 +828,4 @@ if(false) {}
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=index-src_s-15d6d477aa0b8680ba2f.js.map
+//# sourceMappingURL=index-src_s-091f51c5ab0cabefd150.js.map
