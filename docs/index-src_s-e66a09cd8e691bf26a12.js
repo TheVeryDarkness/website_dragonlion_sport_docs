@@ -159,14 +159,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
     style: {
-      "cursor": "pointer"
+      cursor: _ctx.has_sub ? 'pointer' : 'default'
     },
     onClick: _cache[1] || (_cache[1] = function () {
       return _ctx.changeStatus && _ctx.changeStatus.apply(_ctx, arguments);
     }),
     title: _ctx.root.value
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.has_sub ? _ctx.open ? "→" : "↓" : "[]"), 9
-  /* TEXT, PROPS */
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.has_sub ? _ctx.open ? "→" : "↓" : "[]"), 13
+  /* TEXT, STYLE, PROPS */
   , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
     onClick: _cache[2] || (_cache[2] = function () {
       return _ctx.chooseNode && _ctx.chooseNode.apply(_ctx, arguments);
@@ -798,9 +798,9 @@ if(false) {}
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["index-css_b","index-data_t","index-node_modules_pnpm_registry_nlark_com_c","index-node_modules_pnpm_registry_nlark_com_vue_3_1_1_node_modules_vue_dist_vue_esm-bundler_js-d3bbd7-20476580","index-node_modules_pnpm_registry_nlark_com_vue_compiler-core_3_1_1_node_modules_vue_compiler-core_di-60acff9b","index-node_modules_pnpm_registry_nlark_com_vue_compiler-dom_3_1_1_node_modules_vue_compiler-dom_dist-1610fa15","index-node_modules_pnpm_registry_nlark_com_vue_reactivity_3_1_1_node_modules_vue_reactivity_dist_rea-bced1e2e","index-node_modules_pnpm_registry_nlark_com_vue_runtime-core_3_1_1_node_modules_vue_runtime-core_dist-b703a4a0","index-node_modules_pnpm_registry_nlark_com_vue_runtime-dom_3_1_1_node_modules_vue_runtime-dom_dist_r-32ad1f27","index-node_modules_pnpm_registry_nlark_com_vue_shared_3_1_1_node_modules_vue_shared_dist_shared_esm--c462ac9b","index-n","index-src_c","index-src_e","index-src_l","index-src_row_vue-0"], function() { return __webpack_require__("./src/index.ts"); })
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["index-css_b","index-data_t","index-node_modules_pnpm_registry_nlark_com_c","index-node_modules_pnpm_registry_nlark_com_vue_3_1_1_node_modules_vue_dist_vue_esm-bundler_js-d3bbd7-20476580","index-node_modules_pnpm_registry_nlark_com_vue_compiler-core_3_1_1_node_modules_vue_compiler-core_di-60acff9b","index-node_modules_pnpm_registry_nlark_com_vue_c","index-node_modules_pnpm_registry_nlark_com_vue_runtime-core_3_1_1_node_modules_vue_runtime-core_dist-b703a4a0","index-node_modules_pnpm_registry_nlark_com_vue_runtime-dom_3_1_1_node_modules_vue_runtime-dom_dist_r-32ad1f27","index-node_modules_pnpm_registry_nlark_com_vue_shared_3_1_1_node_modules_vue_shared_dist_shared_esm--c462ac9b","index-n","index-src_c","index-src_l","index-src_row_vue-0"], function() { return __webpack_require__("./src/index.ts"); })
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=index-src_s-181bfbd619576e42a3a3.js.map
+//# sourceMappingURL=index-src_s-e66a09cd8e691bf26a12.js.map
