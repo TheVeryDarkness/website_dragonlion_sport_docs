@@ -94,10 +94,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   var _component_Editor = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Editor");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-    style: {
-      "position": "absolute",
-      "inset": "0"
-    },
+    style: _ctx.styleObject,
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return _ctx.open = !_ctx.open;
     })
@@ -118,7 +115,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     key: 0,
     src: _ctx.video,
     style: {
-      "width": "fill"
+      "width": "100%"
     },
     onTimeupdate: _cache[1] || (_cache[1] = function () {
       return _ctx.check && _ctx.check.apply(_ctx, arguments);
@@ -138,8 +135,8 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     sandbox: "allow-same-origin allow-top-navigation-by-user-activation allow-scripts"
   }, null, 8
   /* PROPS */
-  , ["src"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 512
-  /* NEED_PATCH */
+  , ["src"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 4
+  /* STYLE */
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.open]]);
 });
 
@@ -192,7 +189,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_pnpm_registry_nlark_com_css_loader_5_2_6_webpack_5_39_1_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_pnpm_registry_nlark_com_css_loader_5_2_6_webpack_5_39_1_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nvideo.video[data-v-0eef3c34] {\r\n  margin-top: 0.6em;\r\n  float: left;\r\n  display: block;\n}\niframe.video[data-v-0eef3c34] {\r\n  border: 0;\r\n  margin-top: 0.6em;\r\n  float: left;\r\n  display: none;\n}\r\n", "",{"version":3,"sources":["webpack://./src/displayer.vue"],"names":[],"mappings":";AAqJA;EACE,iBAAiB;EACjB,WAAW;EACX,cAAc;AAChB;AACA;EACE,SAAS;EACT,iBAAiB;EACjB,WAAW;EACX,aAAa;AACf","sourcesContent":["<template>\r\n  <div style=\"position: absolute; inset: 0\" v-show=\"open\" @click=\"open = !open\">\r\n    <div\r\n      v-if=\"open\"\r\n      style=\"position: absolute; display: flex; margin: 6%; width: 88%\"\r\n    >\r\n      <fieldset style=\"width: 100%\" class=\"top\" @click.stop=\"\">\r\n        <Editor\r\n          v-if=\"nodes.length\"\r\n          v-bind:node=\"node\"\r\n          @update=\"update\"\r\n          ref=\"editor\"\r\n        />\r\n        <hr v-if=\"video || frame\" />\r\n        <div style=\"width: 100%\">\r\n          <video\r\n            v-if=\"!!video\"\r\n            v-bind:src=\"video\"\r\n            style=\"width: fill\"\r\n            @timeupdate=\"check\"\r\n            controls\r\n            autoplay\r\n          >\r\n            浏览器不支持HTML5视频，请使用高版本浏览器或点击链接\r\n          </video>\r\n          <iframe\r\n            v-if=\"!!frame\"\r\n            v-bind:src=\"frame\"\r\n            style=\"min-width: 78vw; min-height: 52vw\"\r\n            title=\"内联框架\"\r\n            sandbox=\"allow-same-origin allow-top-navigation-by-user-activation allow-scripts\"\r\n          ></iframe>\r\n        </div>\r\n      </fieldset>\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport { NodeBasic, VideoInfo } from \"@/tree\";\r\nimport Editor from \"@/editor.vue\";\r\nimport { defineComponent, PropType, reactive } from \"vue\";\r\n\r\nconst Displayer = defineComponent({\r\n  data() {\r\n    return { ended: false, inited: false, open: false };\r\n  },\r\n  props: {\r\n    nodes: { type: Array as PropType<(VideoInfo & NodeBasic)[]>, default: [] },\r\n    mode: { type: String as PropType<\"html5\" | \"iframe\"> },\r\n  },\r\n  computed: {\r\n    video(): string {\r\n      return this.getStr(\"src\");\r\n    },\r\n    range(): [number, number] {\r\n      const range = this.getArr(\"range\");\r\n      var res: [number, number] = [0, Infinity];\r\n      if (range) {\r\n        const r0 = parseInt(range[0]);\r\n        const r1 = parseInt(range[1]);\r\n        if (!isNaN(r0)) res[0] = r0;\r\n        if (!isNaN(r1)) res[1] = r1;\r\n      }\r\n      return res;\r\n    },\r\n    frame(): string {\r\n      const from = this.getStr(\"from\");\r\n      const frame = this.getStr(\"frame\");\r\n      if (!frame) return \"\";\r\n      if (from == \"bilibili\") {\r\n        // See http://docs.bilibili.cn/wiki\r\n        // Reference:\r\n        //\thttps://blog.csdn.net/xinshou_caizhu/article/details/94028606\r\n        //\thttps://www.bilibili.com/read/cv5293665/\r\n        return frame + \"&high_quality=1&t=\" + this.range[0];\r\n      } else if (from == \"vqq\") {\r\n        // See https://m.v.qq.com/txp/v3/src/iframeapi/new.html\r\n        return frame + \"&show1080p=1&starttime=\" + this.range[0];\r\n      } else if (from == \"youku\") {\r\n        // See http://open.iqiyi.com/lib/play.html,\r\n        //\tor http://static-d.iqiyi.com/ext/openapi/iQiyi_Gragonfly_coop_20190304.pdf\r\n        // Reference:\r\n        //\thttps://open.iqiyi.com/help/qa/play.html\r\n        //\thttps://cloud.tencent.com/developer/article/1494396\r\n        return (\r\n          frame + \"?starttime=\" + this.range[0] + \"&endtime=\" + this.range[1]\r\n        );\r\n      } else {\r\n        console.log(\"Unrecognized video source: '\", from, \"'\");\r\n        return frame;\r\n      }\r\n    },\r\n    node(): NodeBasic | VideoInfo {\r\n      return this.nodes[this.nodes.length - 1];\r\n    },\r\n  },\r\n  watch: {\r\n    nodes() {\r\n      this.inited = false;\r\n      this.open = true;\r\n    },\r\n  },\r\n  methods: {\r\n    check(ev: Event) {\r\n      const video = ev.target as HTMLVideoElement;\r\n      if (!this.inited) {\r\n        video.currentTime = this.range[0];\r\n        video.play();\r\n        this.inited = true;\r\n      }\r\n      if (!this.ended && video.currentTime >= this.range[1]) {\r\n        video.pause();\r\n        this.ended = true;\r\n      }\r\n    },\r\n    update(\r\n      key: string,\r\n      value: undefined | string | string[] | string[][] | NodeBasic[]\r\n    ) {\r\n      var _node = this.nodes[this.nodes.length - 1];\r\n      if (value == undefined) delete _node[key];\r\n      else _node[key] = value;\r\n      (this.$refs.editor as typeof Editor).$forceUpdate();\r\n      this.$forceUpdate();\r\n    },\r\n    getStr<T extends \"src\" | \"frame\" | \"origin\" | \"from\">(key: T) {\r\n      var value = \"\";\r\n      this.nodes.forEach((node: VideoInfo) => {\r\n        const v = node[key];\r\n        if (v) value = v;\r\n      });\r\n      return value;\r\n    },\r\n    getArr<T extends \"range\">(key: T) {\r\n      var value: string[] = [];\r\n      this.nodes.forEach((node: VideoInfo) => {\r\n        const v = node[key];\r\n        if (v) value = v;\r\n      });\r\n      return value;\r\n    },\r\n  },\r\n  components: { Editor },\r\n});\r\nexport default Displayer;\r\n</script>\r\n\r\n<style scoped>\r\nvideo.video {\r\n  margin-top: 0.6em;\r\n  float: left;\r\n  display: block;\r\n}\r\niframe.video {\r\n  border: 0;\r\n  margin-top: 0.6em;\r\n  float: left;\r\n  display: none;\r\n}\r\n</style>"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nvideo.video[data-v-0eef3c34] {\r\n  margin-top: 0.6em;\r\n  float: left;\r\n  display: block;\n}\niframe.video[data-v-0eef3c34] {\r\n  border: 0;\r\n  margin-top: 0.6em;\r\n  float: left;\r\n  display: none;\n}\r\n", "",{"version":3,"sources":["webpack://./src/displayer.vue"],"names":[],"mappings":";AA6KA;EACE,iBAAiB;EACjB,WAAW;EACX,cAAc;AAChB;AACA;EACE,SAAS;EACT,iBAAiB;EACjB,WAAW;EACX,aAAa;AACf","sourcesContent":["<template>\r\n  <div :style=\"styleObject\" v-show=\"open\" @click=\"open = !open\">\r\n    <div\r\n      v-if=\"open\"\r\n      style=\"position: absolute; display: flex; margin: 6%; width: 88%\"\r\n    >\r\n      <fieldset style=\"width: 100%\" class=\"top\" @click.stop=\"\">\r\n        <Editor\r\n          v-if=\"nodes.length\"\r\n          v-bind:node=\"node\"\r\n          @update=\"update\"\r\n          ref=\"editor\"\r\n        />\r\n        <hr v-if=\"video || frame\" />\r\n        <div style=\"width: 100%\">\r\n          <video\r\n            v-if=\"!!video\"\r\n            v-bind:src=\"video\"\r\n            style=\"width: 100%\"\r\n            @timeupdate=\"check\"\r\n            controls\r\n            autoplay\r\n          >\r\n            浏览器不支持HTML5视频，请使用高版本浏览器或点击链接\r\n          </video>\r\n          <iframe\r\n            v-if=\"!!frame\"\r\n            v-bind:src=\"frame\"\r\n            style=\"min-width: 78vw; min-height: 52vw\"\r\n            title=\"内联框架\"\r\n            sandbox=\"allow-same-origin allow-top-navigation-by-user-activation allow-scripts\"\r\n          ></iframe>\r\n        </div>\r\n      </fieldset>\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport { NodeBasic, VideoInfo } from \"@/tree\";\r\nimport Editor from \"@/editor.vue\";\r\nimport { defineComponent, PropType, reactive } from \"vue\";\r\n\r\nconst Displayer = defineComponent({\r\n  data() {\r\n    return {\r\n      ended: false,\r\n      inited: false,\r\n      open: false,\r\n      height: document.body.offsetHeight,\r\n    };\r\n  },\r\n  props: {\r\n    nodes: { type: Array as PropType<(VideoInfo & NodeBasic)[]>, default: [] },\r\n    mode: { type: String as PropType<\"html5\" | \"iframe\"> },\r\n  },\r\n  computed: {\r\n    styleObject(): Object {\r\n      return { position: \"absolute\", inset: 0, height: this.height + \"px\" };\r\n    },\r\n    video(): string {\r\n      return this.getStr(\"src\");\r\n    },\r\n    range(): [number, number] {\r\n      const range = this.getArr(\"range\");\r\n      var res: [number, number] = [0, Infinity];\r\n      if (range) {\r\n        const r0 = parseInt(range[0]);\r\n        const r1 = parseInt(range[1]);\r\n        if (!isNaN(r0)) res[0] = r0;\r\n        if (!isNaN(r1)) res[1] = r1;\r\n      }\r\n      return res;\r\n    },\r\n    frame(): string {\r\n      const from = this.getStr(\"from\");\r\n      const frame = this.getStr(\"frame\");\r\n      if (!frame) return \"\";\r\n      if (from == \"bilibili\") {\r\n        // See http://docs.bilibili.cn/wiki\r\n        // Reference:\r\n        //\thttps://blog.csdn.net/xinshou_caizhu/article/details/94028606\r\n        //\thttps://www.bilibili.com/read/cv5293665/\r\n        return frame + \"&high_quality=1&t=\" + this.range[0];\r\n      } else if (from == \"vqq\") {\r\n        // See https://m.v.qq.com/txp/v3/src/iframeapi/new.html\r\n        return frame + \"&show1080p=1&starttime=\" + this.range[0];\r\n      } else if (from == \"youku\") {\r\n        // See http://open.iqiyi.com/lib/play.html,\r\n        //\tor http://static-d.iqiyi.com/ext/openapi/iQiyi_Gragonfly_coop_20190304.pdf\r\n        // Reference:\r\n        //\thttps://open.iqiyi.com/help/qa/play.html\r\n        //\thttps://cloud.tencent.com/developer/article/1494396\r\n        return (\r\n          frame + \"?starttime=\" + this.range[0] + \"&endtime=\" + this.range[1]\r\n        );\r\n      } else {\r\n        console.log(\"Unrecognized video source: '\", from, \"'\");\r\n        return frame;\r\n      }\r\n    },\r\n    node(): NodeBasic | VideoInfo {\r\n      return this.nodes[this.nodes.length - 1];\r\n    },\r\n  },\r\n  mounted() {\r\n    this.observe();\r\n  },\r\n  watch: {\r\n    nodes() {\r\n      this.inited = false;\r\n      this.open = true;\r\n    },\r\n  },\r\n  methods: {\r\n    observe() {\r\n      const height = Math.max(\r\n        window.innerHeight,\r\n        document.documentElement.scrollHeight\r\n      );\r\n      if (height != this.height) {\r\n        this.height = height;\r\n        this.$forceUpdate();\r\n      }\r\n      setTimeout(() => {\r\n        this.observe();\r\n      }, 100);\r\n    },\r\n    check(ev: Event) {\r\n      const video = ev.target as HTMLVideoElement;\r\n      if (!this.inited) {\r\n        video.currentTime = this.range[0];\r\n        video.play();\r\n        this.inited = true;\r\n      }\r\n      if (!this.ended && video.currentTime >= this.range[1]) {\r\n        video.pause();\r\n        this.ended = true;\r\n      }\r\n    },\r\n    update(\r\n      key: string,\r\n      value: undefined | string | string[] | string[][] | NodeBasic[]\r\n    ) {\r\n      var _node = this.nodes[this.nodes.length - 1];\r\n      if (value == undefined) delete _node[key];\r\n      else _node[key] = value;\r\n      (this.$refs.editor as typeof Editor).$forceUpdate();\r\n      this.$forceUpdate();\r\n    },\r\n    getStr<T extends \"src\" | \"frame\" | \"origin\" | \"from\">(key: T) {\r\n      var value = \"\";\r\n      this.nodes.forEach((node: VideoInfo) => {\r\n        const v = node[key];\r\n        if (v) value = v;\r\n      });\r\n      return value;\r\n    },\r\n    getArr<T extends \"range\">(key: T) {\r\n      var value: string[] = [];\r\n      this.nodes.forEach((node: VideoInfo) => {\r\n        const v = node[key];\r\n        if (v) value = v;\r\n      });\r\n      return value;\r\n    },\r\n  },\r\n  components: { Editor },\r\n});\r\nexport default Displayer;\r\n</script>\r\n\r\n<style scoped>\r\nvideo.video {\r\n  margin-top: 0.6em;\r\n  float: left;\r\n  display: block;\r\n}\r\niframe.video {\r\n  border: 0;\r\n  margin-top: 0.6em;\r\n  float: left;\r\n  display: none;\r\n}\r\n</style>"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -243,13 +240,21 @@ __webpack_require__.r(__webpack_exports__);
 
 const Displayer = (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
     data() {
-        return { ended: false, inited: false, open: false };
+        return {
+            ended: false,
+            inited: false,
+            open: false,
+            height: document.body.offsetHeight,
+        };
     },
     props: {
         nodes: { type: Array, default: [] },
         mode: { type: String },
     },
     computed: {
+        styleObject() {
+            return { position: "absolute", inset: 0, height: this.height + "px" };
+        },
         video() {
             return this.getStr("src");
         },
@@ -299,6 +304,9 @@ const Displayer = (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
             return this.nodes[this.nodes.length - 1];
         },
     },
+    mounted() {
+        this.observe();
+    },
     watch: {
         nodes() {
             this.inited = false;
@@ -306,6 +314,16 @@ const Displayer = (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
         },
     },
     methods: {
+        observe() {
+            const height = Math.max(window.innerHeight, document.documentElement.scrollHeight);
+            if (height != this.height) {
+                this.height = height;
+                this.$forceUpdate();
+            }
+            setTimeout(() => {
+                this.observe();
+            }, 100);
+        },
         check(ev) {
             const video = ev.target;
             if (!this.inited) {
@@ -548,4 +566,4 @@ if(false) {}
 /***/ })
 
 }]);
-//# sourceMappingURL=index-src_c-a0d7e99a87e9f881d752.js.map
+//# sourceMappingURL=index-src_c-eb171dbe9f25af026e67.js.map
