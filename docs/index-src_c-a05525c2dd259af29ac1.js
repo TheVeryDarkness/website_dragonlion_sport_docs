@@ -174,16 +174,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.node, function (value, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       key: key
-    }, [key != 'sub' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+    }, [key != 'sub' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
       style: {
         "cursor": "pointer"
       },
       onClick: _cache[1] || (_cache[1] = function () {
         return _ctx.deleteKey && _ctx.deleteKey.apply(_ctx, arguments);
-      })
-    }, " - ", 512
-    /* NEED_PATCH */
-    ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.editable(key)]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_2, " - ", 512
+      }),
+      for: 'input-value-' + key
+    }, " - ", 8
+    /* PROPS */
+    , ["for"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.editable(key)]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_2, " - ", 512
     /* NEED_PATCH */
     ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !_ctx.editable(key)]]), key ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
       key: 0,
@@ -192,17 +193,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       readonly: ""
     }, null, 8
     /* PROPS */
-    , ["value"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    , ["value"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      id: 'input-value-' + key,
       size: "32",
-      "onUpdate:modelValue": function onUpdateModelValue($event) {
-        return _ctx.node[key] = $event;
-      }
-    }, null, 8
-    /* PROPS */
-    , ["onUpdate:modelValue"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.node[key]]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+      onInput: function onInput($event) {
+        return _ctx.updateValue(key, $event);
+      },
+      value: JSON.stringify(_ctx.node[key])
+    }, null, 40
+    /* PROPS, HYDRATE_EVENTS */
+    , ["id", "onInput", "value"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
   }), 128
   /* KEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
     style: {
       "cursor": "pointer"
     },
@@ -211,7 +214,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, " + ", 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !!_ctx.new_key]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_3, " + ", 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !!_ctx.new_key]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_3, " + ", 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !_ctx.new_key]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     size: "6",
@@ -667,36 +670,9 @@ const Displayer = (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/.pnpm/registry.nlark.com+ts-loader@9.2.3_typescript@4.3.4+webpack@5.39.1/node_modules/ts-loader/index.js??clonedRuleSet-1!./node_modules/.pnpm/registry.nlark.com+vue-loader@16.2.0/node_modules/vue-loader/dist/index.js??ruleSet[0]!./src/editor.vue?vue&type=script&lang=ts ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ (function() {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/.pnpm/registry.nlark.com+vue@3.1.1/node_modules/vue/dist/vue.esm-bundler.js");
-
-const editor = (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
-    data() {
-        return { new_key: "" };
-    },
-    props: { node: { type: Object, required: true } },
-    emits: ["update"],
-    computed: {},
-    methods: {
-        addKey() {
-            this.$emit("update", this.new_key, "");
-            this.new_key = "";
-        },
-        deleteKey(e) {
-            const elem = e.target;
-            const key = elem.parentNode?.childNodes[2].value;
-            this.$emit("update", key, undefined);
-        },
-        editable(key) {
-            return key != "value" && key != "sub";
-        },
-    },
-});
-/* harmony default export */ __webpack_exports__["default"] = (editor);
-
+throw new Error("Module build failed (from ./node_modules/.pnpm/registry.nlark.com+ts-loader@9.2.3_typescript@4.3.4+webpack@5.39.1/node_modules/ts-loader/index.js):\nError: TypeScript emitted no output for D:\\Project\\舞龙协会\\website_dragonlion_sport\\src\\editor.vue.ts.\n    at makeSourceMapAndFinish (D:\\Project\\舞龙协会\\website_dragonlion_sport\\node_modules\\.pnpm\\registry.nlark.com+ts-loader@9.2.3_typescript@4.3.4+webpack@5.39.1\\node_modules\\ts-loader\\dist\\index.js:52:18)\n    at successLoader (D:\\Project\\舞龙协会\\website_dragonlion_sport\\node_modules\\.pnpm\\registry.nlark.com+ts-loader@9.2.3_typescript@4.3.4+webpack@5.39.1\\node_modules\\ts-loader\\dist\\index.js:39:5)\n    at Object.loader (D:\\Project\\舞龙协会\\website_dragonlion_sport\\node_modules\\.pnpm\\registry.nlark.com+ts-loader@9.2.3_typescript@4.3.4+webpack@5.39.1\\node_modules\\ts-loader\\dist\\index.js:22:5)");
 
 /***/ }),
 
@@ -1376,4 +1352,4 @@ if(false) {}
 /***/ })
 
 }]);
-//# sourceMappingURL=index-src_c-590bf6c14ce94ba64bf9.js.map
+//# sourceMappingURL=index-src_c-a05525c2dd259af29ac1.js.map
